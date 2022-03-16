@@ -90,6 +90,7 @@ public class UnitService implements IUnitService{
             params.addValue("UnitCode", sysUnit.getUnitCode() == null? "" : sysUnit.getUnitCode() );
             params.addValue("BranchCode", sysUnit.getBranchCode() == null? "" : sysUnit.getBranchCode());
             params.addValue("UnitName", sysUnit.getUnitName() == null? "" : sysUnit.getUnitName());
+            params.addValue("UnitSName", sysUnit.getUnitSName() == null? "" : sysUnit.getUnitSName());
             params.addValue("Address", sysUnit.getAddress() == null? "" : sysUnit.getAddress());
             params.addValue("Type", sysUnit.getType() == null? 0 : sysUnit.getType());
             params.addValue("Status", sysUnit.getStatus() == null? 0 : sysUnit.getStatus());
