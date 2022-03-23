@@ -25,26 +25,17 @@ public class RestAPIController {
     private JWTAuthenticalServiceImpl jwtAuthenticalService;
 
     @Autowired
-    private IUnitService unitService; // thay đổi interface
+    private IUnitService unitService;
 
     private static Logger logger = LoggingUtil.createLogger(RestAPIController.class);
-    @RequestMapping(value = "/unit/get", method = RequestMethod.POST, produces = "application/json")
+//    API
+    @RequestMapping(value = "/sysunit/get", method = RequestMethod.POST, produces = "application/json")
     public BaseResponse getList(@RequestBody SysUnit body) throws Exception{
         BaseResponse response = new BaseResponse();
 
-        StringBuilder sb = new StringBuilder();
-        String errCode = "";
-        String userId = "";
-
-        long begin = System.currentTimeMillis();
-            // get tất cả các bản ghi của table Unit
-            List<SysUnit> results = unitService.getList(body);
-//            String data = Utils.toJson(results);
-            response.setData(results);
-
-            // Đến đây là thành công
-            response.setResultCode(0);
-
+        List<SysUnit> results = unitService.getList(body);
+        response.setData(results);
+        response.setResultCode(0);
         return response;
     }
 
@@ -52,12 +43,6 @@ public class RestAPIController {
     @RequestMapping(value = "/sysunit/insert", method = RequestMethod.POST, produces = "application/json")
     public BaseResponse insertSysUnit(@RequestBody SysUnit body) throws Exception {
         BaseResponse response = new BaseResponse();
-
-        StringBuilder sb = new StringBuilder();
-        String errCode = "";
-        String userId = "";
-
-        long begin = System.currentTimeMillis();
         unitService.insert(body);
         response.setResultCode(0);
         return response;
@@ -67,11 +52,6 @@ public class RestAPIController {
     @RequestMapping(value = "/sysunit/update", method = RequestMethod.POST, produces = "application/json")
     public BaseResponse updateSysUnit(@RequestBody SysUnit body) throws Exception {
         BaseResponse response = new BaseResponse();
-        StringBuilder sb = new StringBuilder();
-        String errCode = "";
-        String userId = "";
-        long begin = System.currentTimeMillis();
-
         unitService.update(body);
         response.setResultCode(0);
         return response;
@@ -81,11 +61,6 @@ public class RestAPIController {
     @RequestMapping(value = "/sysunit/delete", method = RequestMethod.POST, produces = "application/json")
     public BaseResponse deleteSysUnit(@RequestBody SysUnit body) throws Exception {
         BaseResponse response = new BaseResponse();
-        StringBuilder sb = new StringBuilder();
-        String errCode = "";
-        String userId = "";
-        long begin = System.currentTimeMillis();
-
         unitService.delete(body);
         response.setResultCode(0);
         return response;

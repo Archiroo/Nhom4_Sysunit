@@ -24,11 +24,13 @@ public class UnitService implements IUnitService{
     public UnitService(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    //Phương thức insert
     @Override
     public void insert(SysUnit sysUnit) throws Exception {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(this.jdbcTemplate);
-        simpleJdbcCall.withProcedureName("SysUnitInsert_Nhom4"); // thủ tục insert unit
-        MapSqlParameterSource params = new MapSqlParameterSource();
+        simpleJdbcCall.withProcedureName("SysUnitInsert_Nhom4");// gọi đến tên thủ tục insert
+        MapSqlParameterSource params = new MapSqlParameterSource(); // truyền vào 1 mảng các tham số
         params.addValue("UnitCode", sysUnit.getUnitCode());
         params.addValue("BranchCode", sysUnit.getBranchCode());
         params.addValue("UnitName", sysUnit.getUnitName());
@@ -41,11 +43,12 @@ public class UnitService implements IUnitService{
         params.addValue("Status", sysUnit.getStatus());
         params.addValue("Remarks", sysUnit.getRemarks());
 
-            simpleJdbcCall.execute(params);
-            // Viet ham chung dung GenericType
+        simpleJdbcCall.execute(params); // thực thi thủ tục với các tham số được truyền vào
 
     }
 
+
+    //phương thức update
     @Override
     public void update(SysUnit sysUnit) throws Exception {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(this.jdbcTemplate);
@@ -62,11 +65,12 @@ public class UnitService implements IUnitService{
         params.addValue("Type", sysUnit.getType());
         params.addValue("Status", sysUnit.getStatus());
         params.addValue("Remarks", sysUnit.getRemarks());
-        params.addValue("UpdatedTime", DateTimeUtil.toSqlDate(sysUnit.getUpdatedTime()));
 
         simpleJdbcCall.execute(params);
     }
 
+
+    //phương thức xóa
     @Override
     public void delete(SysUnit sysUnit) throws Exception {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(this.jdbcTemplate);
@@ -74,7 +78,6 @@ public class UnitService implements IUnitService{
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("UnitCode", sysUnit.getUnitCode());
         params.addValue("UpdatedTime", DateTimeUtil.toSqlDate(sysUnit.getUpdatedTime()));
-
         simpleJdbcCall.execute(params);
     }
 
